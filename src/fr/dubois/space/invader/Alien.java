@@ -1,5 +1,5 @@
 /* création de l'Alien :Charles Romaric Marine  */
-/* correction Charles 10/12/2012 */
+
 
 
 package fr.dubois.space.invader;
@@ -7,6 +7,7 @@ package fr.dubois.space.invader;
 import android.graphics.Bitmap;
 
 public class Alien extends Sprite {
+	private boolean direction;
 
 	public Alien(Bitmap bitmap, float x, float y) {
 		super(bitmap, x, y);
@@ -15,7 +16,14 @@ public class Alien extends Sprite {
 	
 	@Override
 	public void act() {
-		// TODO Auto-generated method stub
-	}
-		
+		// TODO Auto-generated method stub		
+	/* Charles 10/12/2012 */
+		if (direction)
+	if ( x>= 600)direction = false;
+	else x= x-60;
+}
+{
+	if(x<= 0)direction = false;
+	else x= x+60;
+}
 }
