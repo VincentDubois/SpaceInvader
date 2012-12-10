@@ -7,7 +7,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+
+
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,13 +29,15 @@ import android.view.View;
 public class SpaceInvaderView extends View {
 	
 	// Dimensions souhaitées
-	private static final int TARGET_HEIGHT = 800;
-	private static final int TARGET_WIDTH = 600;
+	private static final int TARGET_HEIGHT = 1024;
+	private static final int TARGET_WIDTH = 720;
 
 	private Paint paint; // Style pour le texte	
 	private String text; // texte à afficher
 
-
+/*charles*/
+	Alien alien ;
+	
 	public SpaceInvaderView(Context context) {
 		super(context);
 		init();
@@ -49,9 +54,10 @@ public class SpaceInvaderView extends View {
 	}
 
 
-	
 
-	void init(){
+/*Charles*/
+	void init (){
+
 		paint = new Paint();
 		paint.setStyle(Style.STROKE);
 		paint.setColor(Color.YELLOW);
@@ -59,10 +65,29 @@ public class SpaceInvaderView extends View {
 		paint.setTextSize(36);
 		paint.setTextAlign(Paint.Align.CENTER);
 		text = "Texte";
+		/*resetTile(6);
+        loadTile(ALIEN1, r.getDrawable(R.drawable.alien1));
+        loadTile(IC_LAUNCHER, r.getDrawable(R.drawable.ic_launcher));
+        loadTile(MISSILE, r.getDrawable(R.drawable.missile));
+        loadTile(MISSILE2, r.getDrawable(R.drawable.missile2));
+        loadTile(SHIP, r.getDrawable(R.drawable.ship));*/
 	}
 
+ /* Romaric */       
+		public  Bitmap loadimage (int key) {
 
-
+		
+		 Resources r = this.getContext().getResources();
+		 Drawable drawable=r.getDrawable(key);
+ 	     int  y=drawable.getIntrinsicHeight();
+	     int  x=drawable.getIntrinsicWidth();
+         Bitmap bitmap = Bitmap.createBitmap(x, y, Bitmap.Config.ARGB_8888);
+         Canvas canvas = new Canvas(bitmap);
+         drawable.setBounds(0, 0, x, y);
+         drawable.draw(canvas);
+        
+       return bitmap; 
+    }
 
 
 
@@ -73,6 +98,7 @@ public class SpaceInvaderView extends View {
 		super.onDraw(canvas);
 		canvas.drawRGB(0, 0, 0);
 		canvas.drawRect(0, 0, TARGET_WIDTH-1, TARGET_HEIGHT-1, paint);
+		alien.draw(canvas);
 		if (text != null){
 			canvas.drawText(text, canvas.getWidth()/2,canvas.getHeight()/2, paint);
 		}
